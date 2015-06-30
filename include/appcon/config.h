@@ -61,7 +61,7 @@ public:
 	/** Alias for apply() */
 	virtual config &reload() = 0;
 	/** Iterates through all config values as strings */
-	virtual config &each_as_string(std::function<void(std::string, std::string)> code) = 0;
+	virtual const config &each_as_string(std::function<void(std::string, std::string)> code) const = 0;
 
 	virtual std::string key(const std::string &k, const std::string default_value) const = 0;
 	virtual float key(const std::string &k, const float default_value) const = 0;

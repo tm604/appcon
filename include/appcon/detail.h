@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <mutex>
+#include <map>
 #include <unordered_map>
 #include <tuple>
 #include <boost/program_options.hpp>
@@ -253,7 +254,12 @@ public:
 		}
 		return *this;
 	}
-	virtual config &each_as_string(std::function<void(std::string, std::string)> code) override { }
+	virtual const config &each_as_string(std::function<void(std::string, std::string)> code) const override {
+		for(const auto &it : current_as_string_) {
+			code(it.first, it.second);
+		}
+		return *this;
+	}
 
 	virtual std::string key(const std::string &k, const std::string default_value) const override { return key<std::string>(k, default_value); }
 	virtual float key(const std::string &k, const float default_value) const override { return key<float>(k, default_value); }
@@ -372,10 +378,14 @@ protected:
 		namespace po = boost::program_options;
 		{
 			std::lock_guard<std::mutex> guard(mutex_);
-			if(defaults_.count(k) > 0) throw std::logic_error("Attempting to add config key [" + k + "] more than once");
+			if(defaults_.count(k) > 0) {
+				ERROR << "Attempting to add config key [" << k << "] more than once, previous description: " << description_[k];
+				return;
+			}
 			description_[k] = desc;
 			defaults_[k] = def;
 		}
+
 		set(k, def, "definition");
 		options_desc_.add_options()
 			/* boost::po seems to be allergic to strings... */
@@ -395,6 +405,7 @@ protected:
 			if(!v.second.empty()) {
 				auto s = visitor_(v.first, v.second.value(), src);
 				DEBUG << "Applying config [" << v.first << "] = " << s;
+				current_as_string_[v.first] = s;
 			}
 		}
 	}
@@ -453,6 +464,7 @@ protected:
 			po::command_line_parser(
 				argc, argv
 			).options(options_desc_)
+			 .allow_unregistered()
 			 .run(),
 			vm
 		);
@@ -467,7 +479,8 @@ protected:
 			po::store(
 				po::parse_config_file<char>(
 					path.data(),
-					options_desc_
+					options_desc_,
+					true // allow unregistered
 				),
 				vm
 			);
@@ -495,6 +508,10 @@ private:
 		std::string, // key
 		current_type
 	> current_;
+	mutable std::map<
+		std::string, // key
+		std::string
+	> current_as_string_;
 	/** Key descriptions */
 	std::unordered_map<
 		std::string, // key
