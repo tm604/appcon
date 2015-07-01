@@ -41,6 +41,7 @@ find_package(
         chrono
         date_time
         filesystem
+		thread
         system
         locale
         program_options
