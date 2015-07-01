@@ -10,6 +10,7 @@ endif()
 
 set (VERSION_MAJOR 1)
 set (VERSION_MINOR 0)
+set (VERSION_PATCH 2)
 
 include(set_cxx_norm.cmake)
 set_cxx_norm(${CXX_NORM_CXX11})
@@ -57,3 +58,15 @@ install(
 add_subdirectory(lib)
 add_subdirectory(tests)
 
+include (InstallRequiredSystemLibraries)
+set (CPACK_PACKAGE_NAME "libappcon")
+set (CPACK_PACKAGE_VENDOR "")
+set (CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
+set (CPACK_PACKAGE_CONTACT "Tom Molesworth <tom@perlsite.co.uk>")
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "C++ application config library")
+set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.debian")
+set (CPACK_PACKAGE_FILE_NAME "libappcon-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-1")
+set (CPACK_GENERATOR "TGZ;DEB")
+set (CPACK_DEBIAN_PACKAGE_SHLIBDEPS "OFF")
+include (CPack)
