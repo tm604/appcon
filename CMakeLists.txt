@@ -28,7 +28,7 @@ endif()
 
 include_directories(include/)
 include_directories(deps/)
-if(win32)
+IF(WIN32)
 else()
 	add_definitions(-DBOOST_LOG_DYN_LINK)
 endif()
@@ -37,11 +37,11 @@ find_package(
     Boost
     COMPONENTS
 		log_setup
+        log
         chrono
         date_time
         filesystem
         system
-        log
         locale
         program_options
     REQUIRED
