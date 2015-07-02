@@ -10,7 +10,7 @@ endif()
 
 set (VERSION_MAJOR 1)
 set (VERSION_MINOR 0)
-set (VERSION_PATCH 2)
+set (VERSION_PATCH 3)
 
 include(set_cxx_norm.cmake)
 set_cxx_norm(${CXX_NORM_CXX11})
