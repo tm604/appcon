@@ -40,11 +40,11 @@ namespace appcon {
 namespace detail {
 
 /** std::to_string() with support for transparent string passthrough */
-template<typename T>
+template<typename T> inline
 std::string to_string(const T v) { return std::to_string(v); }
-template<>
+template<> inline
 std::string to_string(const std::string &v) { return v; }
-template<>
+template<> inline
 std::string to_string(const std::string v) { return v; }
 
 namespace {
