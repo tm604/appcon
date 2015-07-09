@@ -147,19 +147,6 @@ public:
 		float, std::string
 	>;
 	using storage_type = boost::make_variant_over<types>::type;
-	/*
-	using storage_type = boost::variant<
-		std::string,
-		float,
-		uint8_t,
-		uint16_t,
-		uint32_t,
-		uint64_t,
-		int8_t,
-		int16_t,
-		int32_t,
-		int64_t
-	>;*/
 	using current_type = std::tuple<
 		storage_type, // value
 		std::string, // source
