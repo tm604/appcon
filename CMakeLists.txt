@@ -11,6 +11,8 @@ endif()
 set (VERSION_MAJOR 1)
 set (VERSION_MINOR 0)
 set (VERSION_PATCH 4)
+set (PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+set (PROJECT_VERSION_REVISION 2)
 
 include(set_cxx_norm.cmake)
 set_cxx_norm(${CXX_NORM_CXX11})
