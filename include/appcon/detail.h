@@ -344,6 +344,7 @@ protected:
 			src,
 			boost::chrono::high_resolution_clock::now()
 		);
+		current_as_string_[k] = to_string(v);
 	}
 
 	template<typename T>
