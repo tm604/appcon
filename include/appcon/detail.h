@@ -284,7 +284,7 @@ public:
 		try {
 			if(defaults_.cend() == defaults_.find(k)) {
 				auto v = to_string(default_value);
-				defaults_[k] = default_value;
+				// defaults_[k] = default_value;
 			} else if(boost::get<T>(defaults_[k]) != default_value) {
 				auto v = to_string(default_value);
 				ERROR << "Mismatched default value for config key [" << k << "], specified default was [" << v << "], curent: " << current_info<T>(k);
