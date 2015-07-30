@@ -139,7 +139,7 @@ protected:
 
 };
 
-class config : public appcon::config {
+class config : virtual public appcon::config {
 public:
 	using types = boost::mpl::list<
 		uint8_t, uint16_t, uint32_t, uint64_t,
