@@ -229,6 +229,14 @@ public:
 	/** Watch a config var */
 	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(std::string, std::string)> code) const override { return watch_as<std::string>(k, code); }
 	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(float, float)> code) const override { return watch_as<float>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint8_t, uint8_t)> code) const override { return watch_as<uint8_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint16_t, uint16_t)> code) const override { return watch_as<uint16_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint32_t, uint32_t)> code) const override { return watch_as<uint32_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint64_t, uint64_t)> code) const override { return watch_as<uint64_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int8_t, int8_t)> code) const override { return watch_as<int8_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int16_t, int16_t)> code) const override { return watch_as<int16_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int32_t, int32_t)> code) const override { return watch_as<int32_t>(k, code); }
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int64_t, int64_t)> code) const override { return watch_as<int64_t>(k, code); }
 
 	/** Stop watching */
 	virtual config &unwatch(std::shared_ptr<watcher> w) override { return *this; }

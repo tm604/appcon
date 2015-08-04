@@ -54,6 +54,14 @@ public:
 	/** Watch a config var */
 	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(std::string, std::string)> code) const = 0;
 	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(float, float)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint8_t, uint8_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint16_t, uint16_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint32_t, uint32_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(uint64_t, uint64_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int8_t, int8_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int16_t, int16_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int32_t, int32_t)> code) const = 0;
+	virtual std::shared_ptr<watcher> watch(const std::string &k, std::function<void(int64_t, int64_t)> code) const = 0;
 	/** Stop watching */
 	virtual config &unwatch(std::shared_ptr<watcher> w) = 0;
 	/** Uses local overrides, commandline, environment, config file in that order */
