@@ -62,7 +62,7 @@ SCENARIO("config from file", "[file]") {
 		REQUIRE(cfg->have_key("watched_key"));
 		cfg->set("watched_key", std::string { "original value" }, "manual");
 		bool changed = false;
-		cfg->watch("watched_key", [&](std::string v, std::string old) {
+		cfg->watch("watched_key", std::string { "" }, [&](std::string v, std::string old) {
 			changed = true;
 			CHECK(old == "original value");
 			CHECK(v == "updated value");
@@ -95,7 +95,7 @@ SCENARIO("config from file", "[file]") {
 			out << "watched_key = original value\n";
 		}
 		REQUIRE_NOTHROW(cfg->from_file("config-test.ini"));
-		cfg->watch("watched_key", [&](std::string v, std::string old) {
+		cfg->watch("watched_key", std::string { "" }, [&](std::string v, std::string old) {
 			changed = true;
 			CHECK(old == "original value");
 			CHECK(v == "updated value");
